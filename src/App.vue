@@ -10,8 +10,11 @@
           </transition>
         </el-main>
         <el-footer class="app-footer">
-          <p style="color:black;">Made by Identify.Me Teams</p>
-          <i class="el-icon-loading"></i>
+          <p style="color:#FF9E39;">
+            Made by
+            <b>Identify.Me</b> Teams
+          </p>
+          <i style="color:#FF9E39" class="el-icon-loading"></i>
         </el-footer>
       </el-container>
     </el-row>
@@ -80,7 +83,7 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  background: #077d8a;
+  background: #1d69ab;
   z-index: 3000;
 }
 .el-submenu__title {

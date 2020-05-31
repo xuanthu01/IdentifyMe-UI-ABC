@@ -2,7 +2,7 @@ module.exports = {
   pages: {
     index: {
       entry: "src/main.js",
-      title: "University of Information Technology - VNUHCM "
+      title: "All in NeeBoo | NeeBoo Box Corporation"
     }
   },
   productionSourceMap: false

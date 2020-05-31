@@ -7,7 +7,7 @@
             :default-active="activeItem"
             class="menu-header"
             mode="horizontal"
-            background-color="#077D8A"
+            background-color="#1D69AB"
             text-color="#fff"
             active-text-color="#fff"
           >
@@ -19,20 +19,6 @@
               <el-menu-item @click="handleAboutTeamClick" index="1-2"
                 >Đội ngũ phát triển</el-menu-item
               >
-            </el-submenu>
-            <el-submenu index="2">
-              <template slot="title">Thông báo</template>
-              <el-menu-item index="2-1">Đại học chính quy</el-menu-item>
-              <el-menu-item index="2-2">Đào tạo từ xa</el-menu-item>
-            </el-submenu>
-            <el-submenu index="3">
-              <template slot="title">Quy định - Hướng dẫn</template>
-              <el-menu-item index="3-1"
-                >Quy chế sinh viên chính quy</el-menu-item
-              >
-              <el-menu-item index="3-2">Quy định đào tạo</el-menu-item>
-              <el-menu-item index="3-3">Quy trình cho sinh viên</el-menu-item>
-              <el-menu-item index="3-4">Quy trình cho giảng viên</el-menu-item>
             </el-submenu>
             <el-menu-item index="5" @click="handleConnectionClick"
               >Kết nối sinh viên</el-menu-item
