@@ -4,7 +4,7 @@
       <el-select
         v-model="value"
         @change="setSelectConnection(value)"
-        placeholder="Select an active connection"
+        placeholder="Chọn một kết nối đang hoạt động"
         clearable
       >
         <el-option

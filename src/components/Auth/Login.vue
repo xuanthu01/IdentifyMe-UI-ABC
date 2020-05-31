@@ -2,7 +2,7 @@
   <div class="login">
     <img alt="Vue logo" src="../../assets/Identifyme-logo.png" />
     <el-card>
-      <h2>Chào mừng bạn đến với Identify.Me</h2>
+      <h2>Login to Identify.Me</h2>
       <el-form
         class="login-form"
         :model="model"
@@ -35,24 +35,58 @@
             >Đăng nhập</el-button
           >
         </el-form-item>
-        <a class="forgot-password" href="#">Quên mật khẩu?</a>
+        <el-popover
+          placement="top-start"
+          title="Tài khoản demo"
+          trigger="click"
+        >
+          <el-table :data="validCredentials" border>
+            <el-table-column
+              width="70"
+              property="role"
+              label="Role"
+            ></el-table-column>
+            <el-table-column
+              width="120"
+              property="username"
+              label="Username"
+            ></el-table-column>
+            <el-table-column
+              width="120"
+              property="password"
+              label="Password"
+            ></el-table-column>
+          </el-table>
+          <el-button type="text" class="forgot-password" slot="reference"
+            >Quên mật khẩu?</el-button
+          >
+        </el-popover>
       </el-form>
     </el-card>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "login",
   data() {
     return {
-      validCredentials: {
-        username: "sinhvien_demo",
-        password: "sinhvien_demo"
-      },
+      validCredentials: [
+        {
+          role: "user",
+          username: "user_demo",
+          password: "user_demo"
+        },
+        {
+          role: "admin",
+          username: "admin_demo",
+          password: "admin_demo"
+        }
+      ],
       model: {
-        username: "sinhvien_demo",
-        password: "sinhvien_demo"
+        username: "user_demo",
+        password: "user_demo"
       },
       loading: false,
       rules: {
@@ -84,26 +118,41 @@ export default {
     };
   },
   methods: {
-    simulateLogin() {
-      return new Promise(resolve => {
-        setTimeout(resolve, 800);
-      });
-    },
+    ...mapActions("auth/", ["loginUser"]),
     async login() {
       let valid = await this.$refs.form.validate();
       if (!valid) {
         return;
       }
       this.loading = true;
-      await this.simulateLogin();
-      this.loading = false;
-      if (
-        this.model.username === this.validCredentials.username &&
-        this.model.password === this.validCredentials.password
-      ) {
-        this.$message.success("Login thành công");
+      const isValidCred = this.validCredentials.some(
+        cred =>
+          cred.username === this.model.username &&
+          cred.password === this.model.password
+      );
+      if (isValidCred) {
+        let user = this.validCredentials.find(
+          cred => cred.username === this.model.username
+        );
+        const userLogged = await this.loginUser(user);
+
+        if (userLogged) {
+          this.$message.success("Login thành công");
+          if (localStorage.getItem("user") !== null) {
+            if (this.$route.params.nextUrl != null) {
+              this.$router.push(this.$route.params.nextUrl);
+            } else {
+              if (user.role === "admin") {
+                this.$router.push("/schemas/list");
+              } else {
+                this.$router.push("/");
+              }
+            }
+          }
+        }
       } else {
         this.$message.error("Username hoặc password không đúng!");
+        this.loading = false;
       }
     }
   }
@@ -114,6 +163,7 @@ export default {
 .login {
   flex: 1;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -130,7 +180,7 @@ export default {
 }
 </style>
 <style lang="scss">
-$teal: rgb(0, 124, 137);
+$teal: #1d69ab;
 .el-button--primary {
   background: $teal;
   border-color: $teal;

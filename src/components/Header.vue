@@ -21,7 +21,7 @@
               >
             </el-submenu>
             <el-menu-item index="5" @click="handleConnectionClick"
-              >Kết nối sinh viên</el-menu-item
+              >Kết nối công dân</el-menu-item
             >
             <el-submenu index="6">
               <template slot="title">Quản lý Schema</template>
@@ -33,12 +33,12 @@
               >
             </el-submenu>
             <el-submenu index="4">
-              <template slot="title">Cấp bằng</template>
+              <template slot="title">Cấp Chứng nhận</template>
               <el-menu-item index="4-1" @click="handleIssueClick"
-                >Chính quy</el-menu-item
+                >Việc làm</el-menu-item
               >
-              <el-menu-item index="4-2" disabled>Từ xa</el-menu-item>
-              <el-menu-item index="4-3" disabled>Văn bằng 2</el-menu-item>
+              <el-menu-item index="4-2" disabled>Bảng lương</el-menu-item>
+              <el-menu-item index="4-3" disabled>Thực tập</el-menu-item>
             </el-submenu>
             <el-submenu index="7">
               <template slot="title">Xác minh/ Chứng thực</template>
@@ -49,6 +49,18 @@
                 >Yêu cầu xác minh</el-menu-item
               >
             </el-submenu>
+            <el-submenu v-if="!!user" index="user">
+              <template slot="title">
+                Hi, {{ user.username }}
+                <el-avatar icon="el-icon-user-solid"></el-avatar>
+              </template>
+              <el-menu-item index="7-1" @click="logoutUser"
+                >Logout</el-menu-item
+              >
+            </el-submenu>
+            <el-menu-item @click="gotoLogin" v-else index="login"
+              >Login</el-menu-item
+            >
           </el-menu>
         </el-header>
       </el-col>
@@ -57,6 +69,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
   name: "Header",
   data() {
@@ -65,6 +78,10 @@ export default {
     };
   },
   methods: {
+    ...mapActions("auth/", ["logoutUser"]),
+    gotoLogin() {
+      if (this.$route.path !== "/login") this.$router.push("/login");
+    },
     handleConnectionClick() {
       if (this.$route.path !== "/connections")
         this.$router.push("/connections");
@@ -94,6 +111,9 @@ export default {
     handleAboutSSIClick() {
       if (this.$route.path !== "/about/ssi") this.$router.push("/about/ssi");
     }
+  },
+  computed: {
+    ...mapState("auth/", ["user"])
   }
 };
 </script>
@@ -103,6 +123,9 @@ export default {
   margin-top: 3px;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   padding: 0;
+}
+.el-icon-user-solid {
+  margin-right: 0px;
 }
 .menu-header {
   border-radius: 5px;

@@ -4,6 +4,7 @@ import connections from "./modules/connections.module";
 import schemas from "./modules/schemas.module";
 import credentials from "./modules/credentials.module";
 import proof from "./modules/proof.module";
+import auth from "./modules/auth.module";
 import { LOADING, LOADED, ERROR, RESET } from "../constants/MutationTypes";
 Vue.use(Vuex);
 export default new Vuex.Store({
@@ -48,6 +49,7 @@ export default new Vuex.Store({
     connections,
     schemas,
     credentials,
-    proof
+    proof,
+    auth
   }
 });

@@ -1,10 +1,15 @@
 <template>
   <el-container class="create-invitation">
-    <h2>Hệ thống kết nối sinh viên sử dụng Self-Soverereign Identity</h2>
+    <h2>
+      Hệ thống kết nối các công dân, người lao động sử dụng Self-Soverereign
+      Identity
+    </h2>
     <QRCode v-if="show" :value="invitationUrl" size="200"></QRCode>
 
     <h2 v-if="isConnected">SSI Client has been accepted</h2>
-    <h2 v-else>Sinh viên quét mã để kết nối</h2>
+    <h2 v-else>
+      Công dân, người lao động dùng app tạo và quét mã sau để kết nối
+    </h2>
     <el-button
       type="primary"
       @click="onClickCreateInvitation()"

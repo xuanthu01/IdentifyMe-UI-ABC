@@ -1,8 +1,9 @@
 <template>
   <el-container class="issue-credential-container">
-    <h2>Issue Credential</h2>
+    <hr />
+    <h2>Cấp chứng nhận cho công dân</h2>
     <el-steps :active="active" align-center>
-      <el-step title="1. Choose connection">
+      <el-step title="1. Chọn kết nối">
         <template slot="description">
           <SelectConnection
             v-if="showSelectConnection"
@@ -11,7 +12,7 @@
         </template>
       </el-step>
 
-      <el-step title="2. Choose Credential Definition">
+      <el-step title="2. Chọn loại chứng nhận">
         <template slot="description">
           <SelectCredentialDefinitation
             :schema_ids="schemaIds"
@@ -19,7 +20,7 @@
           />
         </template>
       </el-step>
-      <el-step title="3. Set Attributes">
+      <el-step title="3.Cung cấp thuộc tính">
         <template slot="description">
           <FormAttributes v-if="showFromAttr"></FormAttributes>
         </template>

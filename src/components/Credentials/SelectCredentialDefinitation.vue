@@ -4,7 +4,7 @@
       <el-select
         v-model="value"
         @change="setSelectedCredentialDefinition(value)"
-        placeholder="Select a credential definition"
+        placeholder="Chọn một 'credential definition'"
         clearable
       >
         <el-option
