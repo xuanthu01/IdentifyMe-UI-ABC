@@ -84,10 +84,7 @@ const routes = [
         path: "team",
         component: () => import("../components/About/Team.vue")
       }
-    ],
-    meta: {
-      guest: true
-    }
+    ]
   },
   {
     path: "/login",

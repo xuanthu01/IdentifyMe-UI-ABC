@@ -1,5 +1,5 @@
 import { login } from "../../api";
-
+import router from "../../router";
 const state = {
   user: JSON.parse(localStorage.getItem("user"))
 };
@@ -14,7 +14,7 @@ const mutations = {
   LOGOUT_USER: state => {
     state.user = null;
     localStorage.removeItem("user");
-    window.location.reload();
+    router.push("/");
   }
 };
 
