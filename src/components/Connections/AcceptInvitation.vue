@@ -1,6 +1,6 @@
 <template>
   <el-row style="display:flex;justify-content: center">
-    <el-col :xs="24" :md="24" :lg="8" :xl="8">
+    <el-col v-if="user.role === 'admin'" :xs="24" :md="24" :lg="8" :xl="8">
       <h2>Nhập URL hoặc chuỗi base64</h2>
       <el-input
         :disabled="loading"
@@ -16,6 +16,10 @@
         @click="onAcceptClick"
         >Chấp nhận</el-button
       >
+    </el-col>
+    <el-col v-else :span="24">
+      <h1>401 Unauthorized</h1>
+      <h3>You are not have permission to access this page.</h3>
     </el-col>
   </el-row>
 </template>
@@ -60,7 +64,8 @@ export default {
     }
   },
   computed: {
-    ...mapState(["loading", "error", "errorMessage"])
+    ...mapState(["loading", "error", "errorMessage"]),
+    ...mapState("auth/", ["user"])
   }
 };
 </script>
