@@ -16,11 +16,7 @@ export default {
 
 <style>
 #banner {
-  background: linear-gradient(
-    90deg,
-    rgba(210, 234, 245, 1) 0%,
-    rgba(29, 105, 171, 1) 93%
-  );
+  background: linear-gradient(315deg, #ef5734 0%, #ffcc2f 74%);
 }
 #bannerimage {
   cursor: pointer;

@@ -180,7 +180,7 @@ export default {
 }
 </style>
 <style lang="scss">
-$teal: #1d69ab;
+$teal: #ef5734;
 .el-button--primary {
   background: $teal;
   border-color: $teal;

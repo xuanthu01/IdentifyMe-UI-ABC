@@ -7,7 +7,7 @@
             :default-active="activeItem"
             class="menu-header"
             mode="horizontal"
-            background-color="#1D69AB"
+            background-color="#ef5734"
             text-color="#fff"
             active-text-color="#fff"
           >
@@ -30,6 +30,9 @@
               >
               <el-menu-item index="6-2" @click="handleCreateSchemaClick"
                 >Tạo mới Schema</el-menu-item
+              >
+              <el-menu-item index="6-33" @click="handleCreateCredDefClick"
+                >Tạo mới Credential Definition</el-menu-item
               >
             </el-submenu>
             <el-submenu index="4">
@@ -93,6 +96,10 @@ export default {
     handleCreateSchemaClick() {
       if (this.$route.path !== "/schemas/create")
         this.$router.push("/schemas/create");
+    },
+    handleCreateCredDefClick() {
+      if (this.$route.path !== "/schemas/create-definition")
+        this.$router.push("/schemas/create-definition");
     },
     handleIssueClick() {
       if (this.$route.path !== "/credentials/issue")

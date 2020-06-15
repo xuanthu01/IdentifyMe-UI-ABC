@@ -30,6 +30,10 @@ const routes = [
       {
         path: "list",
         component: () => import("../components/Schemas/ListSchemas.vue")
+      },
+      {
+        path: "create-definition",
+        component: () => import("../components/Schemas/CreateCredDef.vue")
       }
     ],
     meta: {
