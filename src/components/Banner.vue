@@ -24,9 +24,9 @@ export default {
   background-image: url("../assets/neeboo-banner.png");
   height: 140px;
   border-radius: 5px;
-  background-position: left;
-  background-size: contain;
   background-repeat: no-repeat;
+  background-size: 300px 100px;
+  background-position: 2%;
 }
 #team-logo {
   cursor: pointer;
