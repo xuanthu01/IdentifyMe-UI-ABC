@@ -42,7 +42,7 @@ export default {
     TableFoundCredentials
   },
   data: () => ({
-    pageSize: 10,
+    pageSize: 50,
     filter: "",
     page: 1
   }),
