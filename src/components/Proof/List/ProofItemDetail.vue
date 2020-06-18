@@ -67,6 +67,44 @@
                 autocomplete="off"
               ></el-input>
             </el-form-item>
+            <el-form-item
+              v-if="revealed_attrs"
+              label="Các thuộc tính được cung cấp"
+              :label-width="labelWidth"
+            >
+              <el-input
+                class="input-readonly"
+                v-for="attr in Object.keys(revealed_attrs)"
+                :key="attr"
+                :value="revealed_attrs[attr].raw"
+                disabled
+                autocomplete="off"
+              >
+                <div class="detail-prepend" slot="prepend">
+                  {{ attr.split("_")[1] }}
+                </div>
+              </el-input>
+              <el-input
+                class="input-readonly"
+                v-for="attr in Object.keys(requested_predicates)"
+                :key="attr"
+                :value="predicates[attr] ? 'true' : 'false'"
+                disabled
+                autocomplete="off"
+              >
+                <div class="detail-prepend" style="width: 100px" slot="prepend">
+                  {{
+                    "Is " +
+                      requested_predicates[attr]["name"] +
+                      " " +
+                      requested_predicates[attr]["p_type"] +
+                      " " +
+                      requested_predicates[attr]["p_value"] +
+                      " ?"
+                  }}
+                </div>
+              </el-input>
+            </el-form-item>
           </el-form>
           <span slot="footer" class="dialog-footer">
             <el-button type="primary" @click="setVisible(false)"
@@ -88,13 +126,25 @@ export default {
     show: Boolean,
     requested_attributes: String
   },
-  mounted() {},
+  mounted() {
+    console.log("proof", this.item);
+    this.revealed_attrs = this.item.presentation.requested_proof.revealed_attrs;
+    this.predicates = this.item.presentation.requested_proof.predicates;
+    this.requested_predicates = this.item.presentation_request.requested_predicates;
+    console.log(
+      "mounted -> this.requested_predicates",
+      this.requested_predicates
+    );
+  },
   data() {
     return {
       labelWidth: "120px",
       proof: this.item,
       showDetails: this.show,
-      isMobile: isMobile
+      isMobile: isMobile,
+      revealed_attrs: null,
+      predicates: null,
+      requested_predicates: null
     };
   },
   methods: {},
@@ -106,4 +156,16 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.el-input__inner {
+  color: #000 !important;
+}
+.detail-prepend {
+  width: 100px !important;
+  font-weight: bold !important;
+  color: #000;
+}
+.input-readonly {
+  margin: 3px 0;
+}
+</style>
